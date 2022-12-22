@@ -8,7 +8,7 @@ import {IconProps} from '../components/Icon/Icon';
  */
 
 export interface BibItem {
-  section: string;
+  doi_url: string;
   // url: string;
   content: string;
 }

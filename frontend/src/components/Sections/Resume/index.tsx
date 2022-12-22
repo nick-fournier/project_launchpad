@@ -1,11 +1,11 @@
-import {FC, memo} from 'react';
+import {FC,memo} from 'react';
 
-import {education, experience, SectionId, skills, publications} from '../../../data/data';
+import {education, experience, publications,SectionId, skills} from '../../../data/data';
 import Section from '../../Layout/Section';
+import BibliographyItem from "./BibliographyItem";
 import ResumeSection from './ResumeSection';
 import {SkillGroup} from './Skills';
 import TimelineItem from './TimelineItem';
-import BibliographyItem from "./BibliographyItem";
 
 const Resume: FC = memo(() => {
   return (
@@ -23,7 +23,7 @@ const Resume: FC = memo(() => {
         </ResumeSection>
         <ResumeSection title="Select Publications">
           {publications.map((item, index) => (
-            <BibliographyItem item={item} key={`${item.section}-${index}`} />
+            <BibliographyItem item={item} key={`${item.doi_url}-${index}`} />
           ))}
         </ResumeSection>
         <ResumeSection title="Skills">

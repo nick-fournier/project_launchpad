@@ -24,6 +24,11 @@ declare module 'react-html-parser' {
     ): ReactElement<any>;
 }
 
+declare module '*.bib' {
+  const content: any;
+  export default content;
+}
+
 declare module '*.jpg' {
   const value: string;
   export default value;

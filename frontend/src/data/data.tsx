@@ -42,6 +42,7 @@ import {
 
 // import {parseBibFile} from 'bibtex';
 import publicationsFile from '!!raw-loader!./publications.bib'
+
 const Cite = require('citation-js')
 
 
@@ -54,39 +55,28 @@ const publicationData = Cite(publicationsFile, ['-i']);
 
 export const publications: BibItem[] = [];
 
-// export const publications: BibItem[] = [
-//     {
-//       section: 'Publications',
-//       content: publicationData.format('bibliography', {
-//         format: 'html',
-//         template: 'apa',
-//         lang: 'en-US'
-//       }),
-//     },
-// ];
-
-// const tmp = Cite(publicationData.data[1])
-// console.log(tmp.format('bibliography', {
-//         format: 'html',
-//         template: 'apa',
-//         lang: 'en-US'
-//       })
-// );
 
 Object.keys(publicationData.data).forEach((key, index) => {
 
   const citation = Cite(publicationData.data[key])
+  const doi = citation.data[0].DOI
   const html_string = citation.format('bibliography', {
     format: 'html',
     template: 'apa',
     lang: 'en-US'
   });
 
+  let doi_url = 'https://doi.org/' + citation.data[0].DOI;
+
+  if(doi == undefined) {
+    doi_url = ''
+  }
+
   publications[index] = {
-    section: 'publications',
+    doi_url: doi_url,
     content: html_string,
   }
-    // console.log(publicationData.data[key]);
+
 });
 
 /**
@@ -105,7 +95,7 @@ export const SectionId = {
   About: 'about',
   Contact: 'contact',
   Portfolio: 'portfolio',
-  Resume: 'resume',
+  Resume: 'Curriculum Vitae',
   Skills: 'skills',
   Stats: 'stats',
   Testimonials: 'testimonials',
