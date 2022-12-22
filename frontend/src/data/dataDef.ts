@@ -1,7 +1,17 @@
 import {StaticImageData} from 'next/image';
 import {FC, SVGProps} from 'react';
-
 import {IconProps} from '../components/Icon/Icon';
+
+
+/**
+ * BibliographyItem items
+ */
+
+export interface BibItem {
+  section: string;
+  // url: string;
+  content: string;
+}
 
 export interface HomepageMeta {
   title: string;

@@ -28,7 +28,7 @@ import porfolioImage11 from '../images/portfolio/portfolio-11.jpg';
 import profilepic from '../images/profilepic.jpg';
 import testimonialImage from '../images/testimonial.webp';
 import {
-  About,
+  About, BibItem,
   ContactSection,
   ContactType,
   Hero,
@@ -39,6 +39,55 @@ import {
   TestimonialSection,
   TimelineItem,
 } from './dataDef';
+
+// import {parseBibFile} from 'bibtex';
+import publicationsFile from '!!raw-loader!./publications.bib'
+const Cite = require('citation-js')
+
+
+/**
+ * BibliographyItem
+ */
+
+// const bibData = parseBibFile(bibFile);
+const publicationData = Cite(publicationsFile, ['-i']);
+
+export const publications: BibItem[] = [];
+
+// export const publications: BibItem[] = [
+//     {
+//       section: 'Publications',
+//       content: publicationData.format('bibliography', {
+//         format: 'html',
+//         template: 'apa',
+//         lang: 'en-US'
+//       }),
+//     },
+// ];
+
+// const tmp = Cite(publicationData.data[1])
+// console.log(tmp.format('bibliography', {
+//         format: 'html',
+//         template: 'apa',
+//         lang: 'en-US'
+//       })
+// );
+
+Object.keys(publicationData.data).forEach((key, index) => {
+
+  const citation = Cite(publicationData.data[key])
+  const html_string = citation.format('bibliography', {
+    format: 'html',
+    template: 'apa',
+    lang: 'en-US'
+  });
+
+  publications[index] = {
+    section: 'publications',
+    content: html_string,
+  }
+    // console.log(publicationData.data[key]);
+});
 
 /**
  * Page meta data
@@ -371,8 +420,3 @@ export const socialLinks: Social[] = [
   {label: 'Instagram', Icon: InstagramIcon, href: 'https://www.instagram.com/tbakerx/'},
   {label: 'Twitter', Icon: TwitterIcon, href: 'https://twitter.com/TimBakerx'},
 ];
-
-/**
- * Publication Citations
- */
-
