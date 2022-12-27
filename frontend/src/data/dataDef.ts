@@ -1,7 +1,7 @@
 import {StaticImageData} from 'next/image';
 import {FC, SVGProps} from 'react';
-import {IconProps} from '../components/Icon/Icon';
 
+import {IconProps} from '../components/Icon/Icon';
 
 /**
  * BibliographyItem items
@@ -96,11 +96,16 @@ export interface PortfolioItem {
 /**
  * Resume section
  */
+export interface TimelineSubItem {
+  title: string;
+  content: JSX.Element;
+}
+
 export interface TimelineItem {
   date: string;
   location: string;
   title: string;
-  content: JSX.Element;
+  content?: TimelineSubItem[];
 }
 
 /**
@@ -132,9 +137,9 @@ export const ContactType = {
   Location: 'Location',
   Github: 'Github',
   LinkedIn: 'LinkedIn',
-  Facebook: 'Facebook',
-  Twitter: 'Twitter',
-  Instagram: 'Instagram',
+  // Facebook: 'Facebook',
+  // Twitter: 'Twitter',
+  // Instagram: 'Instagram',
 } as const;
 
 export type ContactType = typeof ContactType[keyof typeof ContactType];

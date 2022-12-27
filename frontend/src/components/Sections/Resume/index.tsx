@@ -1,26 +1,40 @@
-import {FC,memo} from 'react';
+import {FC, memo} from 'react';
 
-import {education, experience, publications,SectionId, skills} from '../../../data/data';
+import {awards, education, experience, publications, SectionId, skills} from '../../../data/data';
 import Section from '../../Layout/Section';
-import BibliographyItem from "./BibliographyItem";
+import BibliographyItem from './BibliographyItem';
+import Education from './Education';
 import ResumeSection from './ResumeSection';
 import {SkillGroup} from './Skills';
-import TimelineItem from './TimelineItem';
+import Timeline from './Timeline';
 
 const Resume: FC = memo(() => {
   return (
     <Section className="bg-neutral-100" sectionId={SectionId.Resume}>
       <div className="flex flex-col divide-y-2 divide-neutral-300">
-        <ResumeSection title="Education">
-          {education.map((item, index) => (
-            <TimelineItem item={item} key={`${item.title}-${index}`} />
-          ))}
-        </ResumeSection>
-        <ResumeSection title="Work">
+        <ResumeSection title="Experience">
           {experience.map((item, index) => (
-            <TimelineItem item={item} key={`${item.title}-${index}`} />
+            <Timeline item={item} key={`${item.title}-${index}`} />
           ))}
         </ResumeSection>
+
+        <div className="grid grid-cols-1 gap-2 md:grid-cols-2">
+          <span className="flex-1 text-sm sm:flex-none">
+            <ResumeSection title="Education">
+              {education.map((item, index) => (
+                <Education item={item} key={`${item.title}-${index}`} />
+              ))}
+            </ResumeSection>
+          </span>
+          <span className="flex-1 text-sm sm:flex-none">
+            <ResumeSection title="Awards">
+              {awards.map((item, index) => (
+                <Education item={item} key={`${item.title}-${index}`} />
+              ))}
+            </ResumeSection>
+          </span>
+        </div>
+
         <ResumeSection title="Select Publications">
           {publications.map((item, index) => (
             <BibliographyItem item={item} key={`${item.doi_url}-${index}`} />
