@@ -1,4 +1,6 @@
 mysqlclient>=2.1.1
 python-dotenv>=1.0.0
+portfolio-optimizer @ git+https://github.com/nick-fournier/portfolio-optimizer.git#egg=version_subpkg&subdirectory=portfolio_optimizer
+sbyc-course-app @ git+https://github.com/nick-fournier/SBYC-FNS.git#egg=version_subpkg&subdirectory=sbyc_course_app
 # portfolio-optimizer @ file:///home/nick/clones/project_launchpad/portfolio_optimizer-0.1.tar.gz
 # sbyc-course-app @ file:///home/nick/clones/project_launchpad/sbyc_course_app-0.1.tar.gz
