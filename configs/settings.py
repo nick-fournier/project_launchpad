@@ -151,7 +151,7 @@ if socket.gethostname() != 'nick-thinkpad':
     
     CSRF_COOKIE_SECURE = True
 
-    ALLOWED_HOSTS += ['nfournier.pythonanywhere.com', 'www.nicholasfournier.com']
+    ALLOWED_HOSTS += ['nfournier.pythonanywhere.com', 'apps.nicholasfournier.com']
     
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.mysql',
