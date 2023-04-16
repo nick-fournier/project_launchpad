@@ -34,6 +34,9 @@ SECURE_SSL_REDIRECT = False
 SESSION_COOKIE_SECURE = False
 CSRF_COOKIE_SECURE = False
 
+# Redirect after login
+LOGIN_REDIRECT_URL = '/'
+
 # Application definition
 INSTALLED_APPS = [
     'django.contrib.admin',
