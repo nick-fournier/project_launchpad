@@ -19,7 +19,8 @@ from launchpad import views
 
 
 urlpatterns = [
-    path('', views.index),
+    # path('', views.index),
+    path('', views.IndexView.as_view(), name='index'),
     path('admin/', admin.site.urls),
     path('fns/', include('sbyc_course_app.urls')),
     path('portfolio-optimizer/', include('portfolio_optimizer.urls'))
