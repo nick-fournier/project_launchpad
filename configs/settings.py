@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap4',
     'portfolio_optimizer',
     'sbyc_course_app',
+    'launchpad',
 ]
 
 MIDDLEWARE = [

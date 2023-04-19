@@ -15,8 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from launchpad import views
+
 
 urlpatterns = [
+    path('', views.index),
     path('admin/', admin.site.urls),
     path('fns/', include('sbyc_course_app.urls')),
     path('portfolio-optimizer/', include('portfolio_optimizer.urls'))
