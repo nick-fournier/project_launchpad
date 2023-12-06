@@ -145,6 +145,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 if socket.gethostname() != 'nick-thinkpad':
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = False
+    
+    STATIC_ROOT = '/home/nfournier/project_launchpad/static'
 
     # Security & HTTPS SSL
     SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
