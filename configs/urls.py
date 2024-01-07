@@ -23,5 +23,6 @@ urlpatterns = [
     path('', views.IndexView.as_view(), name='index'),
     path('admin/', admin.site.urls),
     path('fns/', include('sbyc_course_app.urls')),
-    path('portfolio-optimizer/', include('portfolio_optimizer.urls'))
+    path('portfolio-optimizer/', include('portfolio_optimizer.urls')),
+    path('bvi-itinerary/', include('bvi_itinerary.urls')),
 ]

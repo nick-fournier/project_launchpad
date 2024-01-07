@@ -4,3 +4,9 @@
 [submodule "submodules/sbyc_course_app"]
 	path = submodules/sbyc_course_app
 	url = https://github.com/nick-fournier/sbyc_course_app.git
+[submodule "submodules/traffic_ops"]
+	path = submodules/traffic_ops
+	url = git@github.com:nick-fournier/traffic-ops.git
+[submodule "submodules/bvi_itinerary"]
+	path = submodules/bvi_itinerary
+	url = git@github.com:nick-fournier/bvi_itinerary.git

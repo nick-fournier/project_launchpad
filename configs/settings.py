@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'portfolio_optimizer',
     'sbyc_course_app',
     'launchpad',
+    'bvi_itinerary',
 ]
 
 MIDDLEWARE = [
