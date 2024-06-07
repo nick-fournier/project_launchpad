@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "project-launchpad"
+version = "0.1.0"
+description = "Central Django project to combine Django apps."
+authors = ["nick-fournier <nichfournier@gmail.com>"]
+readme = "README.md"
+package-mode = false
+
+[tool.poetry.dependencies]
+python = ">=3.10,<3.11"
+django = "^4.1"
+mysqlclient = "^2.2.4"
+python-dotenv = "^1.0.1"
+sbyc-course-app = {git = "git@github.com:nick-fournier/sbyc_course_app.git"}
+bvi-itinerary = {git = "git@github.com:nick-fournier/bvi_itinerary.git"}
+portfolio-optimizer = {git = "git@github.com:nick-fournier/portfolio_optimizer.git"}
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

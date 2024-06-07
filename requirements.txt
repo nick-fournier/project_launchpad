@@ -1,8 +1,0 @@
-Django==4.1
-mysqlclient>=2.1.1
-python-dotenv>=1.0.0
-# portfolio_optimizer -e file:///home/nick/clones/project_launchpad/submodules/portfolio_optimizer
-# sbyc-course-app -e file:///home/nick/clones/project_launchpad/submodules/sbyc_course_app
-portfolio-optimizer @ git+https://github.com/nick-fournier/portfolio_optimizer.git
-sbyc-course-app @ git+https://github.com/nick-fournier/sbyc_course_app.git
-bvi_itinerary @ git+https://github.com/nick-fournier/bvi_itinerary.git
