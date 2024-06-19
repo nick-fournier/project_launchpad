@@ -94,12 +94,20 @@ WSGI_APPLICATION = 'configs.wsgi.application'
 DATABASES = {
     'default':
         {
-            'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.getenv('MYSQL_NAME'),
-            'USER':  os.getenv('MYSQL_USER'),
-            'PASSWORD': os.getenv('MYSQL_PASS'),
-            'HOST': os.getenv('MYSQL_HOST'),
-        }
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.getenv('PG_DBNAME'),
+            'USER':  os.getenv('PG_USER'),
+            'PASSWORD': os.getenv('PG_PASS'),
+            'HOST': os.getenv('PG_HOST'),
+            'PORT': os.getenv('PG_PORT'),
+        },
+        # {
+        #     'ENGINE': 'django.db.backends.mysql',
+        #     'NAME': os.getenv('MYSQL_NAME'),
+        #     'USER':  os.getenv('MYSQL_USER'),
+        #     'PASSWORD': os.getenv('MYSQL_PASS'),
+        #     'HOST': os.getenv('MYSQL_HOST'),
+        # }
 }
 
 # Password validation
@@ -161,12 +169,11 @@ if socket.gethostname() == 'nick-thinkpad':
     'default':
         {
             'ENGINE': 'django.db.backends.postgresql',
-            # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
             'NAME': os.getenv('PG_DBNAME'),
             'USER':  os.getenv('PG_USER'),
             'PASSWORD': os.getenv('PG_PASS'),
             'HOST': os.getenv('PG_HOST'),
-            'PORT': 5432,
+            'PORT': os.getenv('PG_PORT'),
         },
     # 'default': {
     #         'ENGINE': 'django.db.backends.sqlite3',
