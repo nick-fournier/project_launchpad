@@ -26,13 +26,16 @@ load_dotenv()
 SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-ALLOWED_HOSTS = []
+DEBUG = False
+ALLOWED_HOSTS = ['nfournier.pythonanywhere.com', 'apps.nicholasfournier.com']
 
 # Security & HTTPS SSL
-SECURE_SSL_REDIRECT = False
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+# Security & HTTPS SSL
+SECURE_SSL_REDIRECT = True
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
 
 # Redirect after login
 LOGIN_REDIRECT_URL = '/'
@@ -46,7 +49,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'crispy_forms',
-    'portfolio_optimizer',
+    'portfolio_optimizer_webapp',
     'sbyc_course_app',
     'launchpad',
     'bvi_itinerary',
@@ -89,12 +92,15 @@ WSGI_APPLICATION = 'configs.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    },
+    'default':
+        {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.getenv('MYSQL_NAME'),
+            'USER':  os.getenv('MYSQL_USER'),
+            'PASSWORD': os.getenv('MYSQL_PASS'),
+            'HOST': os.getenv('MYSQL_HOST'),
+        }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -139,28 +145,31 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
+
 # local or production settings
-if socket.gethostname() != 'nick-thinkpad':
+if socket.gethostname() == 'nick-thinkpad':
     # SECURITY WARNING: don't run with debug turned on in production!
-    DEBUG = False
+    DEBUG = True    
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    # SECURE_PROXY_SSL_HEADER = None
+    ALLOWED_HOSTS = []
+    SECURE_SSL_REDIRECT = False
+    # SESSION_COOKIE_SECURE = False
+    # CSRF_COOKIE_SECURE = False
     
-    STATIC_ROOT = '/home/nfournier/project_launchpad/static'
-
-    # Security & HTTPS SSL
-    SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-    
-    SECURE_SSL_REDIRECT = True
-    
-    SESSION_COOKIE_SECURE = True
-    
-    CSRF_COOKIE_SECURE = True
-
-    ALLOWED_HOSTS += ['nfournier.pythonanywhere.com', 'apps.nicholasfournier.com']
-    
-    DATABASES['default'] = {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': os.getenv('MYSQL_NAME'),
-        'USER':  os.getenv('MYSQL_USER'),
-        'PASSWORD': os.getenv('MYSQL_PASS'),
-        'HOST': os.getenv('MYSQL_HOST'),
-    }
+    DATABASES = {
+    'default':
+        {
+            'ENGINE': 'django.db.backends.postgresql',
+            # 'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.getenv('PG_DBNAME'),
+            'USER':  os.getenv('PG_USER'),
+            'PASSWORD': os.getenv('PG_PASS'),
+            'HOST': os.getenv('PG_HOST'),
+            'PORT': 5432,
+        },
+    # 'default': {
+    #         'ENGINE': 'django.db.backends.sqlite3',
+    #         'NAME': BASE_DIR / 'db.sqlite3',
+    #     },
+}

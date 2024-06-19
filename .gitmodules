@@ -1,9 +1,9 @@
-[submodule "submodules/portfolio_optimizer"]
-	path = submodules/portfolio_optimizer
-	url = https://github.com/nick-fournier/portfolio_optimizer.git
+[submodule "submodules/portfolio_optimizer_webapp"]
+	path = submodules/portfolio_optimizer_webapp
+	url = git@github.com:nick-fournier/portfolio_optimizer_webapp.git
 [submodule "submodules/sbyc_course_app"]
 	path = submodules/sbyc_course_app
-	url = https://github.com/nick-fournier/sbyc_course_app.git
+	url = git@github.com:nick-fournier/sbyc_course_app.git
 [submodule "submodules/traffic_ops"]
 	path = submodules/traffic_ops
 	url = git@github.com:nick-fournier/traffic-ops.git
