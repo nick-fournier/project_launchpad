@@ -38,16 +38,14 @@ description = "Itinerary planner for sailing BVI"
 optional = false
 python-versions = "^3.10"
 files = []
-develop = false
+develop = true
 
 [package.dependencies]
 django = "^5.0.6"
 
 [package.source]
-type = "git"
-url = "https://github.com/nick-fournier/bvi_itinerary.git"
-reference = "HEAD"
-resolved_reference = "1ebfd58bda2025a0aeb5e01649a1364eee960ca1"
+type = "directory"
+url = "submodules/bvi_itinerary"
 
 [[package]]
 name = "certifi"
@@ -506,12 +504,12 @@ tenacity = ">=6.2.0"
 
 [[package]]
 name = "portfolio-optimizer-webapp"
-version = "0.1.0"
+version = "0.1.5"
 description = ""
 optional = false
 python-versions = ">=3.10,<3.15"
 files = []
-develop = false
+develop = true
 
 [package.dependencies]
 Django = "^5.0.6"
@@ -520,10 +518,8 @@ pandas = "^2.2.2"
 plotly = "^5.22.0"
 
 [package.source]
-type = "git"
-url = "https://github.com/nick-fournier/portfolio_optimizer_webapp.git"
-reference = "HEAD"
-resolved_reference = "e9979380fd2ac50360877cce938a8763f293fd65"
+type = "directory"
+url = "submodules/portfolio_optimizer_webapp"
 
 [[package]]
 name = "psycopg2"
@@ -669,12 +665,12 @@ use-chardet-on-py3 = ["chardet (>=3.0.2,<6)"]
 
 [[package]]
 name = "sbyc-course-app"
-version = "0.1.0"
+version = "2024.2.0"
 description = "A race course map lookup web app for SBYC Friday Night Series"
 optional = false
 python-versions = "^3.10"
 files = []
-develop = false
+develop = true
 
 [package.dependencies]
 django = "^5.0.6"
@@ -684,10 +680,8 @@ gpxpy = "^1.6.2"
 PyYAML = "^6.0.1"
 
 [package.source]
-type = "git"
-url = "https://github.com/nick-fournier/sbyc_course_app.git"
-reference = "HEAD"
-resolved_reference = "9c3ad9df2d63c3da1484587d5ea5af463698d6a4"
+type = "directory"
+url = "submodules/sbyc_course_app"
 
 [[package]]
 name = "six"
@@ -783,4 +777,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.10,<3.11"
-content-hash = "29f051229707dfdb6a679c1a63e20ed9f23d15b78f3c6d4d2e169a2534359e34"
+content-hash = "0cec2bac3c3e27f7ff6ec8e171574e4e97632eac2fb47f3c7015f86861d40844"
