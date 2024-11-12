@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-import os, socket
+import os
+import socket
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -17,6 +18,7 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load environment
+os.environ.clear()
 load_dotenv()
 
 # Quick-start development settings - unsuitable for production
@@ -155,7 +157,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 # local or production settings
-if socket.gethostname() == 'nick-thinkpad':
+if socket.gethostname() in ['nick-thinkpad', 'DESKTOP-HREK1P1']:
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = True    
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
