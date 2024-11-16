@@ -8,7 +8,6 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = "^3.11"
-#mysqlclient = "^2.2.4"
 python-dotenv = "^1.0.1"
 # sbyc-course-app = {git = "https://github.com/nick-fournier/sbyc_course_app.git"}
 # bvi-itinerary = {git = "https://github.com/nick-fournier/bvi_itinerary.git"}
@@ -17,9 +16,7 @@ bvi-itinerary = {path = "submodules/bvi_itinerary", develop = true}
 portfolio-optimizer-webapp = {path = "submodules/portfolio_optimizer_webapp", develop = true}
 sbyc-course-app = {path = "submodules/sbyc_course_app", develop = true}
 psycopg2-binary = "^2.9.10"
-mysqlclient = "^2.2.5"
 django = "^4.2"
-asgiref = "^3.8.1"
 
 
 [build-system]
