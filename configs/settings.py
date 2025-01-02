@@ -18,7 +18,7 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load environment
-os.environ.clear()
+# os.environ.clear()
 load_dotenv()
 
 # Quick-start development settings - unsuitable for production
@@ -29,7 +29,13 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
-ALLOWED_HOSTS = ['nfournier.pythonanywhere.com', 'apps.nicholasfournier.com']
+ALLOWED_HOSTS = [
+    'nfournier.pythonanywhere.com',
+    'apps.nicholasfournier.com',
+    'localhost',
+    '127.0.0.1',
+    '0.0.0.0'
+    ]
 
 # Security & HTTPS SSL
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
@@ -103,13 +109,6 @@ DATABASES = {
             'HOST': os.getenv('PG_HOST'),
             'PORT': os.getenv('PG_PORT'),
         },
-        # {
-        #     'ENGINE': 'django.db.backends.mysql',
-        #     'NAME': os.getenv('MYSQL_NAME'),
-        #     'USER':  os.getenv('MYSQL_USER'),
-        #     'PASSWORD': os.getenv('MYSQL_PASS'),
-        #     'HOST': os.getenv('MYSQL_HOST'),
-        # }
 }
 
 # Password validation
@@ -157,28 +156,18 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 
 # local or production settings
-if socket.gethostname() in ['nick-thinkpad', 'DESKTOP-HREK1P1']:
+
+if (
+    (socket.gethostname() in ['nick-thinkpad', 'DESKTOP-HREK1P1']) or \
+    (os.getenv('DJANGO_ENV') != 'production')
+):
+    print('Running in local development mode')
+    
     # SECURITY WARNING: don't run with debug turned on in production!
-    DEBUG = True    
+    DEBUG = True
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-    # SECURE_PROXY_SSL_HEADER = None
     ALLOWED_HOSTS = []
     SECURE_SSL_REDIRECT = False
+    # SECURE_PROXY_SSL_HEADER = None
     # SESSION_COOKIE_SECURE = False
     # CSRF_COOKIE_SECURE = False
-    
-    DATABASES = {
-    'default':
-        {
-            'ENGINE': 'django.db.backends.postgresql',
-            'NAME': os.getenv('PG_DBNAME'),
-            'USER':  os.getenv('PG_USER'),
-            'PASSWORD': os.getenv('PG_PASS'),
-            'HOST': os.getenv('PG_HOST'),
-            'PORT': os.getenv('PG_PORT'),
-        },
-    # 'default': {
-    #         'ENGINE': 'django.db.backends.sqlite3',
-    #         'NAME': BASE_DIR / 'db.sqlite3',
-    #     },
-}

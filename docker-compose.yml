@@ -1,0 +1,9 @@
+services:
+  web:
+    build:
+      context: .
+      target: development  # Use "production" for production builds
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env  # Load environment variables from a .env file
