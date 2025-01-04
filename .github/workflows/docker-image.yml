@@ -26,6 +26,7 @@ jobs:
 
     - name: Build the Docker image
       run: |
+        pwd
         ls
         docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-web:latest
         docker build ./nginx --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-nginx:latest
