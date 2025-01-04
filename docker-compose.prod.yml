@@ -1,6 +1,6 @@
 services:
   web:
-    image: nfournier/launchpad-web:latest
+    image: nichfournier/launchpad-web:latest
     ports:
       - "9000:9000"
     env_file:
@@ -11,7 +11,7 @@ services:
       - static_volume:/app/staticfiles
       - media_volume:/app/mediafiles
   nginx:
-    image: nicholasfournier/launchpad-nginx:latest
+    image: nichfournier/launchpad-nginx:latest
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - static_volume:/app/staticfiles
@@ -21,7 +21,7 @@ services:
     depends_on:
       - web
   tunnel:
-    image: nicholasfournier/launchpad-tunnel:latest
+    image: nichfournier/launchpad-tunnel:latest
     command: tunnel --no-autoupdate --config /app/config.yml run
     volumes:
       - ./tunnel.yml:/app/config.yml
