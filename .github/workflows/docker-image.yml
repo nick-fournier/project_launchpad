@@ -26,11 +26,9 @@ jobs:
 
     - name: Build the Docker image
       run: |
-        pwd
-        ls
-        docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-web:latest
-        docker build ./nginx --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-nginx:latest
-        docker build ./tunnel --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-tunnel:latest
+        docker build --no-cache . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-web:latest
+        docker build --no-cache ./nginx --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-nginx:latest
+        docker build --no-cache ./tunnel --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-tunnel:latest
 
     - name: Push the Docker image
       run: |
