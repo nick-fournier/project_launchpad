@@ -24,14 +24,15 @@ jobs:
       with:
         submodules: recursive  # Initialize and update submodules
 
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v2
+      with:
+        use-new-builder: true
+
     - name: Build the Docker image
       run: |
-        docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-web:latest
-        docker build ./nginx --file ./nginx/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-nginx:latest
-        docker build ./tunnel --file ./tunnel/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-tunnel:latest
 
-    - name: Push the Docker image
-      run: |
-        docker push ${{ secrets.DOCKER_USERNAME }}/launchpad-web:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/launchpad-nginx:latest
-        docker push ${{ secrets.DOCKER_USERNAME }}/launchpad-tunnel:latest
+        # Build for both amd64 and arm64
+        docker buildx build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-web:latest --platform linux/amd64,linux/arm64 --push
+        docker buildx build ./nginx --file ./nginx/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-nginx:latest --platform linux/amd64,linux/arm64 --push
+        docker buildx build ./tunnel --file ./tunnel/Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-tunnel:latest --platform linux/amd64,linux/arm64 --push
