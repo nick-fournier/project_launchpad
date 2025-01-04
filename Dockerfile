@@ -41,8 +41,8 @@ COPY . /app
 # Ensure the entrypoint script is executable
 RUN chmod +x ./entrypoint.sh
 
-# Expose port 8000
-EXPOSE 8000
+# Expose port 9000
+EXPOSE 9000
 
 # Development stage
 FROM runner AS development
@@ -63,7 +63,16 @@ ARG gid=1000
 RUN groupadd -g ${gid} ${group} \
     && useradd -u ${uid} -g ${group} -s /bin/sh -m ${user}
 
+# Create a directory for static files
+RUN mkdir -p /app/staticfiles
+
+# Give ownership to user and group to static files directory
+RUN chmod -R 775 /app/staticfiles
+RUN chown -R ${uid}:${gid} /app/staticfiles
+
 # Switch to non-root user and adjust permissions
 USER ${uid}:${gid}
 WORKDIR /app
+
+# Run the entrypoint script
 ENTRYPOINT ["/app/entrypoint.sh"]

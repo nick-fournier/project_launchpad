@@ -10,7 +10,6 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 import os
-import socket
 from pathlib import Path
 from dotenv import load_dotenv
 
@@ -18,7 +17,6 @@ from dotenv import load_dotenv
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Load environment
-# os.environ.clear()
 load_dotenv()
 
 # Quick-start development settings - unsuitable for production
@@ -27,23 +25,16 @@ load_dotenv()
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.getenv('SECRET_KEY')
 
+
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-ALLOWED_HOSTS = [
-    'nfournier.pythonanywhere.com',
-    'apps.nicholasfournier.com',
-    'localhost',
-    '127.0.0.1',
-    '0.0.0.0'
-    ]
+DEBUG = True
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+ALLOWED_HOSTS = ['*']
+SECURE_SSL_REDIRECT = False
+SECURE_PROXY_SSL_HEADER = None
+SESSION_COOKIE_SECURE = False
+CSRF_COOKIE_SECURE = False
 
-# Security & HTTPS SSL
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-# Security & HTTPS SSL
-SECURE_SSL_REDIRECT = True
-SESSION_COOKIE_SECURE = True
-CSRF_COOKIE_SECURE = True
 
 # Redirect after login
 LOGIN_REDIRECT_URL = '/'
@@ -152,22 +143,34 @@ STATIC_URL = '/static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # local or production settings
 
-if (
-    (socket.gethostname() in ['nick-thinkpad', 'DESKTOP-HREK1P1']) or \
-    (os.getenv('DJANGO_ENV') != 'production')
-):
-    print('Running in local development mode')
-    
+if (os.getenv('DJANGO_ENV') == 'production'):
+    print('Running in production mode')
+
     # SECURITY WARNING: don't run with debug turned on in production!
-    DEBUG = True
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-    ALLOWED_HOSTS = []
-    SECURE_SSL_REDIRECT = False
-    # SECURE_PROXY_SSL_HEADER = None
-    # SESSION_COOKIE_SECURE = False
-    # CSRF_COOKIE_SECURE = False
+    DEBUG = False
+    ALLOWED_HOSTS = [
+        'nfournier.pythonanywhere.com',
+        'apps.nicholasfournier.com',
+        'launchpad.nicholasfournier.com',
+        'localhost',
+        '127.0.0.1',
+        '0.0.0.0'
+        ]
+    
+    # Security & HTTPS SSL
+    # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+    # Security & HTTPS SSL
+    # SECURE_SSL_REDIRECT = True
+    # SECURE_HSTS_SECONDS = 3600  # Only use in production if fully configured
+    # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    # SECURE_HSTS_PRELOAD = True
+    # CSRF_COOKIE_SECURE = True
+    # SESSION_COOKIE_SECURE = True
+else:
+    print('Running in development mode')

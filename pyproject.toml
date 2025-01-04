@@ -17,6 +17,7 @@ portfolio-optimizer-webapp = {path = "submodules/portfolio_optimizer_webapp", de
 sbyc-course-app = {path = "submodules/sbyc_course_app", develop = true}
 psycopg2-binary = "^2.9.10"
 django = "^4.2"
+gunicorn = "^23.0.0"
 
 
 [build-system]

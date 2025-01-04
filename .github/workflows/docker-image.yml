@@ -25,7 +25,14 @@ jobs:
         submodules: recursive  # Initialize and update submodules
 
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag my-image-name:$(date +%s)
+      run: |
+        TIMESTAMP=$(date +%Y%m%d%H%M%S)
+        docker build . --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-web:latest
+        docker build ./nginx --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-nginx:latest
+        docker build ./tunnel --file Dockerfile --tag ${{ secrets.DOCKER_USERNAME }}/launchpad-tunnel:latest
 
     - name: Push the Docker image
-      run: docker push my-dockerhub-username/my-image-name:lastest
+      run: |
+        docker push ${{ secrets.DOCKER_USERNAME }}/launchpad-web:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/launchpad-nginx:latest
+        docker push ${{ secrets.DOCKER_USERNAME }}/launchpad-tunnel:latest

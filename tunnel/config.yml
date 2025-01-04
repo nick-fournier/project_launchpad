@@ -1,0 +1,4 @@
+ingress:
+  - hostname: "launchpad.nicholasfournier.com"
+    service: http://nginx:80
+  - service: http_status:404

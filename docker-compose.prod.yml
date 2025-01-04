@@ -1,20 +1,17 @@
-# This is a staging compose file for testing the production build locally. It is not used in the deployment process.
 services:
   web:
-    build:
-      context: .
-      target: production  # Use "production" for production builds
+    image: nfournier/launchpad-web:latest
     ports:
       - "9000:9000"
     env_file:
-      - .env  # Load environment variables from a .env file
+      - .env
     environment:
       - DJANGO_ENV=production
     volumes:
       - static_volume:/app/staticfiles
       - media_volume:/app/mediafiles
   nginx:
-    image: nginx:1.27.3-perl
+    image: nicholasfournier/launchpad-nginx:latest
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - static_volume:/app/staticfiles
@@ -24,7 +21,7 @@ services:
     depends_on:
       - web
   tunnel:
-    image: cloudflare/cloudflared:2024.12.2
+    image: nicholasfournier/launchpad-tunnel:latest
     command: tunnel --no-autoupdate --config /app/config.yml run
     volumes:
       - ./tunnel.yml:/app/config.yml
