@@ -4,6 +4,7 @@ services:
     build:
       context: .
       target: production  # Use "production" for production builds
+    container_name: launchpad-web
     ports:
       - "9000:9000"
     env_file:
@@ -15,6 +16,7 @@ services:
       - media_volume:/app/mediafiles
   nginx:
     image: nginx:1.27.3-perl
+    container_name: launchpad-nginx
     volumes:
       - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
       - static_volume:/app/staticfiles
@@ -25,9 +27,10 @@ services:
       - web
   tunnel:
     image: cloudflare/cloudflared:2024.12.2
+    container_name: launchpad-tunnel
     command: tunnel --no-autoupdate --config /app/config.yml run
     volumes:
-      - ./tunnel.yml:/app/config.yml
+      - ./tunnel/config.yml:/app/config.yml
     environment:
       - TUNNEL_ID=${TUNNEL_ID}
       - TUNNEL_TOKEN=${TUNNEL_TOKEN}

@@ -147,30 +147,34 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 
 # local or production settings
-
 if (os.getenv('DJANGO_ENV') == 'production'):
-    print('Running in production mode')
 
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = False
     ALLOWED_HOSTS = [
         'nfournier.pythonanywhere.com',
-        'apps.nicholasfournier.com',
         'launchpad.nicholasfournier.com',
         'localhost',
         '127.0.0.1',
         '0.0.0.0'
         ]
     
+    # Disabled since cloudflare is handling SSL
     # Security & HTTPS SSL
     # SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
-    # Security & HTTPS SSL
     # SECURE_SSL_REDIRECT = True
     # SECURE_HSTS_SECONDS = 3600  # Only use in production if fully configured
     # SECURE_HSTS_INCLUDE_SUBDOMAINS = True
     # SECURE_HSTS_PRELOAD = True
     # CSRF_COOKIE_SECURE = True
     # SESSION_COOKIE_SECURE = True
-else:
-    print('Running in development mode')
+    
+print(
+    f"""
+        Running in {os.getenv('DJANGO_ENV')} mode.
+        DEBUG: {DEBUG}
+        ALLOWED_HOSTS: {ALLOWED_HOSTS}
+        SECURE_SSL_REDIRECT: {SECURE_SSL_REDIRECT}
+        SECURE_PROXY_SSL_HEADER: {SECURE_PROXY_SSL_HEADER}
+    """
+)
