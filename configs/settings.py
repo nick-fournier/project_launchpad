@@ -168,13 +168,3 @@ if (os.getenv('DJANGO_ENV') == 'production'):
     # SECURE_HSTS_PRELOAD = True
     # CSRF_COOKIE_SECURE = True
     # SESSION_COOKIE_SECURE = True
-    
-print(
-    f"""
-        Running in {os.getenv('DJANGO_ENV')} mode.
-        DEBUG: {DEBUG}
-        ALLOWED_HOSTS: {ALLOWED_HOSTS}
-        SECURE_SSL_REDIRECT: {SECURE_SSL_REDIRECT}
-        SECURE_PROXY_SSL_HEADER: {SECURE_PROXY_SSL_HEADER}
-    """
-)

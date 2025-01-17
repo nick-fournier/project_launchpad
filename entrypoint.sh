@@ -18,7 +18,6 @@ if [ "$DJANGO_ENV" == "development" ]; then
     echo "Starting the Django development server..."
     # Start Django's development server
     exec poetry run python manage.py runserver --noreload 0.0.0.0:9000
-    # exec poetry run python manage.py runserver 0.0.0.0:9000 --keyfile certs/localhost.key --certfile certs/localhost.crt
 
 else
     # Production environment setup
