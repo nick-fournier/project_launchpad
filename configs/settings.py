@@ -154,6 +154,7 @@ if (os.getenv('DJANGO_ENV') == 'production'):
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = False
     ALLOWED_HOSTS = [
+        'orange',
         'nfournier.pythonanywhere.com',
         'apps.nicholasfournier.com',
         'launchpad.nicholasfournier.com',
