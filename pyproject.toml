@@ -1,25 +1,23 @@
-[tool.poetry]
+[project]
 name = "project-launchpad"
-version = "0.1.0"
-description = "Central Django project to combine Django apps."
-authors = ["nick-fournier <nichfournier@gmail.com>"]
+version = "2024.2.2"
+description = "A race course map lookup web app for SBYC Friday Night Series."
 readme = "README.md"
-package-mode = false
+requires-python = ">=3.12"
+dependencies = [
+    "bvi-itinerary",
+    "django>=4.2.18",
+    "gunicorn>=23.0.0",
+    "portfolio-optimizer-webapp",
+    "psycopg2-binary>=2.9.10",
+    "python-dotenv>=1.0.1",
+    "sbyc-course-app",
+]
 
-[tool.poetry.dependencies]
-python = "^3.11"
-python-dotenv = "^1.0.1"
-# sbyc-course-app = {git = "https://github.com/nick-fournier/sbyc_course_app.git"}
-# bvi-itinerary = {git = "https://github.com/nick-fournier/bvi_itinerary.git"}
-# portfolio-optimizer-webapp = {git = "https://github.com/nick-fournier/portfolio_optimizer_webapp.git"}
-bvi-itinerary = {path = "submodules/bvi_itinerary", develop = true}
-portfolio-optimizer-webapp = {path = "submodules/portfolio_optimizer_webapp", develop = true}
-sbyc-course-app = {path = "submodules/sbyc_course_app", develop = true}
-psycopg2-binary = "^2.9.10"
-django = "^4.2"
-gunicorn = "^23.0.0"
+[tool.uv.sources]
+portfolio-optimizer-webapp = { workspace = true }
+bvi-itinerary = { workspace = true }
+sbyc-course-app = { workspace = true }
 
-
-[build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+[tool.uv.workspace]
+members = ["submodules/bvi_itinerary", "submodules/sbyc_course_app", "submodules/portfolio_optimizer_webapp"]

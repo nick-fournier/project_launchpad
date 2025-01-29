@@ -25,20 +25,20 @@ services:
       - "80:80"
     depends_on:
       - web
-  tunnel:
-    image: cloudflare/cloudflared:2024.12.2
-    container_name: launchpad-tunnel
-    command: tunnel --no-autoupdate --config /app/config.yml run
-    volumes:
-      - ./tunnel/config.yml:/app/config.yml
-    environment:
-      - TUNNEL_ID=${TUNNEL_ID}
-      - TUNNEL_TOKEN=${TUNNEL_TOKEN}
-      - TZ=America/Los_Angeles
-    depends_on:
-      - web
-    restart: unless-stopped
-    hostname: launchpad.nicholasfournier.com
+  # tunnel:
+  #   image: cloudflare/cloudflared:2024.12.2
+  #   container_name: launchpad-tunnel
+  #   command: tunnel --no-autoupdate --config /app/config.yml run
+  #   volumes:
+  #     - ./tunnel/config.yml:/app/config.yml
+  #   environment:
+  #     - TUNNEL_ID=${TUNNEL_ID}
+  #     - TUNNEL_TOKEN=${TUNNEL_TOKEN}
+  #     - TZ=America/Los_Angeles
+  #   depends_on:
+  #     - web
+  #   restart: unless-stopped
+  #   hostname: launchpad.nicholasfournier.com
 
 volumes:
   static_volume:

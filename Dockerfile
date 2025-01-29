@@ -1,8 +1,8 @@
 # Base image with Poetry installation
 FROM python:3.12-slim AS base
 
-ENV POETRY_HOME=/opt/poetry
-ENV PATH=${POETRY_HOME}/bin:${PATH}
+# Install uv
+COPY --from=ghcr.io/astral-sh/uv:latest /uv /uvx /bin/
 
 # Install system dependencies including git
 RUN apt-get update \
@@ -12,14 +12,11 @@ RUN apt-get update \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Poetry
-RUN curl -sSL https://install.python-poetry.org | python3 - && poetry --version
-
 # Builder stage for dependency installation
 FROM base AS builder
 
 WORKDIR /app
-COPY poetry.lock pyproject.toml ./
+COPY uv.lock pyproject.toml ./
 
 # Copy the project files
 COPY . /app/
@@ -28,8 +25,7 @@ COPY . /app/
 RUN git submodule update --init --recursive
 
 # Create a virtual environment and install dependencies
-RUN poetry config virtualenvs.in-project true
-RUN poetry install --only main --no-interaction --no-ansi
+RUN uv sync --frozen
 
 # Runner stage for the application
 FROM base AS runner
@@ -69,6 +65,7 @@ RUN mkdir -p /app/staticfiles
 # Give ownership to user and group to static files directory
 RUN chmod -R 775 /app/staticfiles
 RUN chown -R ${uid}:${gid} /app/staticfiles
+RUN chown -R ${uid}:${gid} /app/.venv
 
 # Switch to non-root user and adjust permissions
 USER ${uid}:${gid}
