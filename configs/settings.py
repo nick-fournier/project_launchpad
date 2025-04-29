@@ -148,6 +148,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 # local or production settings
 if (os.getenv('DJANGO_ENV') == 'production'):
+    
+    print("Running in production mode")
 
     # SECURITY WARNING: don't run with debug turned on in production!
     DEBUG = False
@@ -169,3 +171,5 @@ if (os.getenv('DJANGO_ENV') == 'production'):
     # SECURE_HSTS_PRELOAD = True
     # CSRF_COOKIE_SECURE = True
     # SESSION_COOKIE_SECURE = True
+else:
+    print("Running in local mode")
